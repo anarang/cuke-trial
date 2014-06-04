@@ -1,10 +1,8 @@
 require 'watir-webdriver'
-
-if ENV["HEADLESS"] then
-  browser = Watir::Browser.new :phantomjs
-else
-  browser = Watir::Browser.new :firefox, :profile => 'default'
-end
+require 'headless'
+headless = Headless.new
+headless.start
+browser = Watir::Browser.new
 
 INDEX_OFFSET = -1
 WEBDRIVER = true
@@ -14,5 +12,5 @@ Before do
 end
 
 at_exit do
-  browser.close
+  @browser.close
 end
